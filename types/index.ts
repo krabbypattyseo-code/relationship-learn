@@ -42,7 +42,6 @@ export interface ModeSelectorProps {
 }
 
 export interface GrowthDashboardProps {
-  userId: UserId;
   entries: ChatEntry[];
 }
 

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import {
   Bar,
   BarChart,
@@ -9,8 +8,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import EntryCard from '@/components/EntryCard';
-import { MODES } from '@/lib/modes';
 import type { GrowthDashboardProps, ChatEntry } from '@/types';
 
 function getWeeklyActivity(entries: ChatEntry[]) {
@@ -68,11 +65,10 @@ function getTopMode(entries: ChatEntry[]): string {
   return top ? `/${top[0]}` : '—';
 }
 
-export default function GrowthDashboard({ userId, entries }: GrowthDashboardProps) {
+export default function GrowthDashboard({ entries }: GrowthDashboardProps) {
   const chartData = getWeeklyActivity(entries);
   const streak = getStreak(entries);
   const topMode = getTopMode(entries);
-  const recent = entries.slice(0, 5);
 
   const stats = [
     { label: 'Total Entri', value: entries.length },
@@ -107,47 +103,6 @@ export default function GrowthDashboard({ userId, entries }: GrowthDashboardProp
           </ResponsiveContainer>
         ) : (
           <p className="py-12 text-center text-rgp-muted">Belum ada data aktivitas.</p>
-        )}
-      </div>
-
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-rgp-charcoal">Entri Terbaru</h2>
-          <Link
-            href={`/${userId}/chat?mode=growth`}
-            className="rounded-full bg-rgp-yellow px-4 py-2 text-sm font-semibold text-rgp-charcoal transition hover:bg-rgp-yellow-soft"
-          >
-            Mulai /growth review
-          </Link>
-        </div>
-
-        {recent.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2">
-            {recent.map((entry) => (
-              <EntryCard
-                key={entry.id}
-                entry={entry}
-                onClick={() => {
-                  window.location.href = `/${userId}/entries/${entry.id}`;
-                }}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-3xl bg-rgp-cream p-8 text-center text-rgp-muted">
-            <p>Belum ada entri. Pilih mode untuk mulai journaling.</p>
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
-              {MODES.slice(0, 3).map((m) => (
-                <Link
-                  key={m.id}
-                  href={`/${userId}/chat?mode=${m.id}`}
-                  className="rounded-full border border-rgp-green/20 px-3 py-1 text-xs text-rgp-green hover:bg-white"
-                >
-                  {m.label}
-                </Link>
-              ))}
-            </div>
-          </div>
         )}
       </div>
     </div>

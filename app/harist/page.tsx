@@ -25,7 +25,7 @@ export default async function HaristDashboardPage() {
           <BookLibrary />
         </div>
 
-        <GrowthDashboard userId="harist" entries={entries} />
+        <GrowthDashboard entries={entries} />
       </main>
     </div>
   );

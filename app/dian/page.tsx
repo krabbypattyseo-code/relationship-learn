@@ -25,7 +25,7 @@ export default async function DianDashboardPage() {
           <BookLibrary />
         </div>
 
-        <GrowthDashboard userId="dian" entries={entries} />
+        <GrowthDashboard entries={entries} />
       </main>
     </div>
   );

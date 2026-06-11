@@ -25,12 +25,12 @@ export default async function GrowthPage() {
         <div className="space-y-16">
           <section>
             <h2 className="mb-6 text-xl font-bold text-rgp-harist">Harist</h2>
-            <GrowthDashboard userId="harist" entries={haristEntries} />
+            <GrowthDashboard entries={haristEntries} />
           </section>
 
           <section>
             <h2 className="mb-6 text-xl font-bold text-rgp-dian">Dian</h2>
-            <GrowthDashboard userId="dian" entries={dianEntries} />
+            <GrowthDashboard entries={dianEntries} />
           </section>
         </div>
       </main>
