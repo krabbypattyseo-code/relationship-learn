@@ -1,0 +1,52 @@
+# Relationship Growth Partner — Cursor Rules
+# Muhammad Harist · June 2026
+
+## Project
+Web app private untuk Harist dan Dian. AI-powered journaling dan
+relationship growth tool. Engine: Claude Sonnet 4.6 via Anthropic API.
+
+## Stack
+- Next.js 14 (App Router) + TypeScript — strict mode ON
+- Tailwind CSS — utility-first, no custom CSS kecuali terpaksa
+- Supabase — PostgreSQL + Auth (atau PIN sederhana untuk MVP)
+- html2pdf.js — client-side PDF export
+- Vercel — deployment
+
+## Folder convention
+app/harist/     → Harist's space (dashboard + chat)
+app/dian/       → Dian's space (dashboard + chat)
+app/growth/     → Shared growth dashboard
+app/api/chat/   → Claude API streaming handler
+lib/prompts.ts  → Semua system prompts (jangan taruh di component)
+lib/storage.ts  → Supabase CRUD helpers
+lib/supabase.ts → Supabase client
+types/index.ts  → Semua TypeScript types
+components/     → Shared UI components
+
+## Code style
+- Selalu pakai TypeScript types dari types/index.ts
+- Functional components only, no class components
+- use client directive hanya kalau butuh interactivity
+- Error handling wajib di semua fetch/async call
+- Loading state wajib di semua async UI
+- Jangan hardcode string — gunakan constants atau types
+
+## UI / UX — Color Palette
+- Primary green: #074836 (rgp-green)
+- Accent yellow: #FFD700 (rgp-yellow)
+- Background cream: #F9F7F2 (rgp-cream)
+- Harist accent: #7C3AED (rgp-harist)
+- Dian accent: #0F766E (rgp-dian)
+- Mobile-first responsive
+- Rounded corners (rounded-3xl, pill buttons)
+
+## Claude API
+- Model: claude-sonnet-4-6
+- Max tokens: 2048 per response
+- Always streaming
+- System prompt dari lib/prompts.ts
+- API key dari env: ANTHROPIC_API_KEY
+
+## Security
+- ANTHROPIC_API_KEY hanya di server-side
+- PIN auth: PIN_HARIST, PIN_DIAN

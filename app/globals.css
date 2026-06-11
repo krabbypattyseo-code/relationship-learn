@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-rgp-cream text-rgp-charcoal antialiased;
+  }
+}
+
+@layer utilities {
+  .dot-pattern {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+
+  .dot-pattern-dark {
+    background-image: radial-gradient(circle, rgba(7, 72, 54, 0.15) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+}
