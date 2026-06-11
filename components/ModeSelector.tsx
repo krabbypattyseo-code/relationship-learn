@@ -8,6 +8,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { MODES, USER_ACCENTS } from '@/lib/modes';
+import { getBooksForMode } from '@/lib/books';
 import type { ModeSelectorProps, Mode } from '@/types';
 
 const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -25,6 +26,7 @@ export default function ModeSelector({ userId, onSelect }: ModeSelectorProps) {
     <div className="grid gap-4 sm:grid-cols-2">
       {MODES.map((mode) => {
         const Icon = ICONS[mode.icon] ?? Sparkles;
+        const priorityBooks = getBooksForMode(mode.id as Mode);
 
         return (
           <button
@@ -38,6 +40,18 @@ export default function ModeSelector({ userId, onSelect }: ModeSelectorProps) {
             </div>
             <h3 className="text-lg font-bold text-rgp-charcoal">{mode.label}</h3>
             <p className="mt-1 text-sm text-rgp-muted">{mode.description}</p>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+            {priorityBooks.slice(0, 4).map((book) => (
+                <span
+                  key={book.id}
+                  className="rounded-full bg-rgp-green/5 px-2 py-0.5 text-xs text-rgp-green"
+                >
+                  {book.title === 'The Female Brain' || book.title === 'The Male Brain'
+                    ? book.title.replace('The ', '')
+                    : book.author.split(' ').pop()}
+                </span>
+              ))}
+            </div>
           </button>
         );
       })}

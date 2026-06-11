@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { Download, Send, Loader2 } from 'lucide-react';
 import type { ChatWindowProps, Message } from '@/types';
 import { exportToPDF } from '@/lib/utils';
+import MessageProse from '@/components/MessageProse';
 
 export default function ChatWindow({
   userId,
@@ -123,22 +124,22 @@ export default function ChatWindow({
           </div>
         )}
 
-        {messages.map((msg, i) => (
-          <div
-            key={`${msg.role}-${i}`}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                msg.role === 'user'
-                  ? 'bg-rgp-green text-white'
-                  : 'bg-rgp-cream text-rgp-charcoal'
-              }`}
-            >
-              <p className="whitespace-pre-wrap">{msg.content}</p>
+        {messages.map((msg, i) =>
+          msg.role === 'user' ? (
+            <div key={`${msg.role}-${i}`} className="flex justify-end">
+              <div className="max-w-[75%] rounded-2xl bg-rgp-green px-5 py-3 text-sm leading-relaxed text-white">
+                <p className="whitespace-pre-wrap">{msg.content}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ) : (
+            <article
+              key={`${msg.role}-${i}`}
+              className="rounded-2xl border border-rgp-green/10 bg-white px-6 py-6 shadow-sm sm:px-8 sm:py-7"
+            >
+              <MessageProse content={msg.content} />
+            </article>
+          )
+        )}
 
         {(isLoading || isStreaming) && messages[messages.length - 1]?.role === 'user' && (
           <div className="flex justify-start">

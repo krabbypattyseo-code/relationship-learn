@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import UserNav from '@/components/UserNav';
 import { MODE_COLORS } from '@/lib/modes';
 import { exportToPDF, formatDate } from '@/lib/utils';
+import MessageProse from '@/components/MessageProse';
 import type { ChatEntry } from '@/types';
 
 interface EntryDetailProps {
@@ -53,21 +54,25 @@ export default function EntryDetailClient({
           ref={contentRef}
           className="space-y-4 rounded-3xl bg-white p-6 shadow-md ring-1 ring-rgp-green/5"
         >
-          {entry.messages.map((msg, i) => (
-            <div
-              key={`${msg.role}-${i}`}
-              className={`rounded-2xl px-4 py-3 text-sm ${
-                msg.role === 'user'
-                  ? 'bg-rgp-green text-white'
-                  : 'bg-rgp-cream text-rgp-charcoal'
-              }`}
-            >
-              <p className="mb-1 text-xs font-semibold uppercase opacity-70">
-                {msg.role}
-              </p>
-              <p className="whitespace-pre-wrap">{msg.content}</p>
-            </div>
-          ))}
+          {entry.messages.map((msg, i) =>
+            msg.role === 'user' ? (
+              <div
+                key={`${msg.role}-${i}`}
+                className="rounded-2xl bg-rgp-green px-5 py-3 text-sm text-white"
+              >
+                <p className="mb-1 text-xs font-semibold uppercase opacity-70">Kamu</p>
+                <p className="whitespace-pre-wrap">{msg.content}</p>
+              </div>
+            ) : (
+              <article
+                key={`${msg.role}-${i}`}
+                className="rounded-2xl border border-rgp-green/10 bg-white px-6 py-6"
+              >
+                <p className="mb-4 text-xs font-semibold uppercase text-rgp-muted">RGP</p>
+                <MessageProse content={msg.content} />
+              </article>
+            )
+          )}
         </div>
 
         <Link

@@ -52,7 +52,9 @@ function DianChatContent() {
         {!selectedMode ? (
           <>
             <h1 className="mb-2 text-3xl font-bold text-rgp-green">Pilih Mode</h1>
-            <p className="mb-8 text-rgp-muted">Pilih mode sebelum mulai chat.</p>
+            <p className="mb-4 text-rgp-muted">
+              Setiap mode di-backup oleh framework teoritis — Barrett, Gottman, Chapman, Johnson, dll.
+            </p>
             <ModeSelector userId="dian" onSelect={handleSelect} />
           </>
         ) : (

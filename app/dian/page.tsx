@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import UserNav from '@/components/UserNav';
 import GrowthDashboard from '@/components/GrowthDashboard';
 import ChangePinForm from '@/components/ChangePinForm';
+import BookLibrary from '@/components/BookLibrary';
 import { getEntries } from '@/lib/storage';
 import type { ChatEntry } from '@/types';
 
@@ -18,6 +19,10 @@ export default async function DianDashboardPage() {
 
         <div className="mb-8">
           <ChangePinForm userId="dian" userLabel="Dian" />
+        </div>
+
+        <div className="mb-8">
+          <BookLibrary />
         </div>
 
         <GrowthDashboard userId="dian" entries={entries} />

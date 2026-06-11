@@ -12,6 +12,14 @@ const VALID_MODES: Mode[] = [
   'growth',
 ];
 
+const MODE_MAX_TOKENS: Record<Mode, number> = {
+  reflect: 4096,
+  analisis: 3072,
+  plan: 3072,
+  conversation: 3072,
+  growth: 3072,
+};
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -46,7 +54,7 @@ export async function POST(req: NextRequest) {
 
     const stream = anthropic.messages.stream({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
+      max_tokens: MODE_MAX_TOKENS[mode as Mode],
       system,
       messages: messages.map((m) => ({
         role: m.role,

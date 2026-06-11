@@ -5,31 +5,31 @@ export const MODES: ModeConfig[] = [
     id: 'reflect',
     label: '/reflect',
     icon: 'mirror',
-    description: 'Journaling momen',
+    description: 'Journaling — Lembke (dopamine), Brizendine (female/male brain), Barrett, Chapman',
   },
   {
     id: 'analisis',
     label: '/analisis',
     icon: 'search',
-    description: 'Bedah situasi',
+    description: 'Bedah situasi — Gottman (Four Horsemen) + Johnson (EFT cycles)',
   },
   {
     id: 'plan',
     label: '/plan',
     icon: 'compass',
-    description: 'Rancang ke depan',
+    description: 'Rancang ke depan — Goleman (EQ) + Levine-Heller (attachment)',
   },
   {
     id: 'conversation',
     label: '/conversation',
     icon: 'message',
-    description: 'Siapkan percakapan',
+    description: 'Siapkan percakapan — Gottman (soft startup) + Brown (vulnerability)',
   },
   {
     id: 'growth',
     label: '/growth',
     icon: 'trending',
-    description: 'Review berkala',
+    description: 'Review berkala — Fisher (love systems) + Perel (LDR intimacy)',
   },
 ];
 
