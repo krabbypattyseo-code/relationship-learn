@@ -35,6 +35,12 @@ export default function Header({ variant = 'light' }: HeaderProps) {
           <Link href="/growth" className="text-sm font-medium opacity-90 hover:opacity-100">
             Growth
           </Link>
+          <Link
+            href="/perlu-diobrolin"
+            className="text-sm font-medium opacity-90 hover:opacity-100"
+          >
+            Perlu Diobrolin
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">

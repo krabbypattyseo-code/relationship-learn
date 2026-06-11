@@ -1,0 +1,380 @@
+[
+  {
+    "id": "self",
+    "name": "Self",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "Saat ini, sejauh apa lo merasa mengenal diri sendiri?"
+      },
+      {
+        "id": "q2",
+        "text": "Apa usaha yang udah dan akan lo lakuin untuk lebih mengenal diri sendiri?"
+      },
+      {
+        "id": "q3",
+        "text": "Apa hal yang lo suka dari diri lo dan nggak lo suka?"
+      },
+      {
+        "id": "q4",
+        "text": "Bottleneck di diri lo yang sampai sekarang sulit dipecahkan?"
+      },
+      {
+        "id": "q5",
+        "text": "Gimana cara lo menangani stress?"
+      },
+      {
+        "id": "q6",
+        "text": "Hal apa yang bikin lo merasa dicintai?"
+      },
+      {
+        "id": "q7",
+        "text": "Kalo lagi sedih, biasanya apa yang lo butuhin?"
+      },
+      {
+        "id": "q8",
+        "text": "Boundaries lo yang gak boleh dilanggar oleh orang lain termasuk orang terdekat apa aja?"
+      },
+      {
+        "id": "q9",
+        "text": "What makes you feel fulfilled?"
+      }
+    ]
+  },
+  {
+    "id": "dream-career-education",
+    "name": "Dream, Career, & Education",
+    "questions": [
+      {
+        "id": "q10",
+        "text": "Pencapaian apa yang paling lo syukuri atau significant impactnya di hidup lo saat ini?"
+      },
+      {
+        "id": "q11",
+        "text": "Apa aja mimpi lo yang belum tercapai dan masih ingin terus lo kejar?"
+      },
+      {
+        "id": "q12",
+        "text": "Apa yang lo harapkan dari partner hidup lo dalam proses mengejar mimpi2 lo? dan bagaimana lo akan melibatkan dia?"
+      },
+      {
+        "id": "q13",
+        "text": "Bagaimana cara lo mendukung mimpi pasangan lo? Sumbangsih apa yang bisa lo berikan dengan senang hati?"
+      },
+      {
+        "id": "q14",
+        "text": "Apa yang ada di perasaan lo ketika melihat pasangan lo achieve something?"
+      },
+      {
+        "id": "q15",
+        "text": "Kalo harus pindah domisili untuk ngejar mimpi (kerja, sekolah lagi, etc) dan posisinya sudah berpasangan, apakah lo milih LDR atau ajak pasangan lo pindah?"
+      },
+      {
+        "id": "q16",
+        "text": "Journey career apa yang ingin lo explore di masa depan atau dalam waktu dekat ini?"
+      },
+      {
+        "id": "q17",
+        "text": "Pengen sekolah lagi enggak? Kenapa dan subjectnya apa?"
+      },
+      {
+        "id": "q18",
+        "text": "Bagaimana cara lo tetep seimbang antara memperjuangkan mimpi dan memenuhi tanggung jawab lo di relationship? Hal apa aja yang menurut lo perlu dikompromikan?"
+      },
+      {
+        "id": "q19",
+        "text": "Hal apa yang pengen lo pelajari dari pasangan lo?"
+      },
+      {
+        "id": "q20",
+        "text": "Hal apa yang pengen lo lakuin agar bisa berdampak untuk sekitar lo?"
+      }
+    ]
+  },
+  {
+    "id": "relationship-commitment",
+    "name": "Relationship & Commitment",
+    "questions": [
+      {
+        "id": "q21",
+        "text": "Apa yang bikin lo merasa lebih baik dengan berpasangan daripada sendiri?"
+      },
+      {
+        "id": "q22",
+        "text": "Apa value yang lo punya, yang lo rasa bisa menambah pasangan lo?"
+      },
+      {
+        "id": "q23",
+        "text": "Gimana cara lo nunjukin komitmen dan komitmen pasangan yang lo harapkan?"
+      },
+      {
+        "id": "q24",
+        "text": "Seberapa penting 'waktu sendiri' buat lo meskipun sudah berpasangan?"
+      },
+      {
+        "id": "q25",
+        "text": "Bagaimana cara lo menyikapi trauma/ past wound pasangan?"
+      },
+      {
+        "id": "q26",
+        "text": "Bagaimana lo melihat masa lalu untuk current relationship?"
+      },
+      {
+        "id": "q27",
+        "text": "Misal nih misalee, lo udah berpasangan tapi di tengah jalan tiba2 lo tertarik sama orang lain? Apa yang lo lakuin?"
+      },
+      {
+        "id": "q28",
+        "text": "Apa yang menurut lo bisa memperkuat dan mengancam sebuah hubungan?"
+      },
+      {
+        "id": "q29",
+        "text": "Misal abis berantem, apa yang bisa bikin lo merasa lebih baik atau deket lagi dengan pasangan lo?"
+      },
+      {
+        "id": "q30",
+        "text": "Bagaimana lo menyikapi perpisahan?"
+      },
+      {
+        "id": "q31",
+        "text": "Kondisi personal apa yang perlu ada dulu di hidupmu sebelum merasa siap untuk komitmen yang lebih dalam?[ Misal kek Pencapaian, kesiapan mental, situasi hidup seperti apa yang harus settle dulu.]"
+      },
+      {
+        "id": "q32",
+        "text": "Kondisi dalam hubungan ini yang perlu kalian lalui / capai bersama sebelum siap ke langkah berikutnya? [Maksudnya sampai di tahap pembuktian apa di hubungan ini sampai bisa lanjut ke next step, ini diantara kita berdua ya bukan hanya di diri masing-masing.]"
+      },
+      {
+        "id": "q33",
+        "text": "Ketika bilang 'butuh waktu' waktu untuk apa? Dan bagaimana akan tahu kalau waktunya sudah cukup? [Supaya bisa di mapping]"
+      },
+      {
+        "id": "q34",
+        "text": "Visi bikin impact untuk orang lain dikejar bersama sebagai pasangan, atau tetap journey personal masing-masing? [Kita kan Dua orang dengan ambisi besar secara individu vs dua orang dengan shared mission]"
+      },
+      {
+        "id": "q35",
+        "text": "Kalau ada perbedaan cara ambil keputusan besar (Dian dan Harist kan kurang lebih idealis vs kalkulatif) sistem seperti apa yang bisa disepakati? [Bukan siapa yang menang tapi mau gabungin aja sih gimana dua perspektif ini bisa saling melengkapi dalam keputusan bersama.]"
+      }
+    ]
+  },
+  {
+    "id": "marriage-life",
+    "name": "Marriage Life",
+    "questions": [
+      {
+        "id": "q36",
+        "text": "Apa arti pernikahan buat lo?"
+      },
+      {
+        "id": "q37",
+        "text": "Kenapa lo merasa perlu menikah/ gak perlu menikah? (inc. apa yang lo cari dari pernikahan/ ketakutan terbesar lo soal pernikahan)"
+      },
+      {
+        "id": "q38",
+        "text": "Kalo lo memilih berumah tangga, nilai-nilai apa yang ingin lo hidupi?"
+      },
+      {
+        "id": "q39",
+        "text": "Penyimpangan apa yang tidak bisa lo tolerir dalam pernikahan?"
+      },
+      {
+        "id": "q40",
+        "text": "Gimana cara lo memecahkan konflik dalam rumah tangga? (bayangan so far ae)"
+      },
+      {
+        "id": "q41",
+        "text": "Rumah tangga tuh kan bagi tugas nihh, lo kepengen berperan sebagai apa?"
+      },
+      {
+        "id": "q42",
+        "text": "Kalo lo berkeluarga, kebiasaan apa yang ingin lo lakukan atau budayakan di keluarga lo setiap hari?"
+      },
+      {
+        "id": "q43",
+        "text": "Menurut lo, apa batas pernikahan yang bisa dipertahankan dan enggak?"
+      }
+    ]
+  },
+  {
+    "id": "conflict-management",
+    "name": "Conflict Management",
+    "questions": [
+      {
+        "id": "q44",
+        "text": "Kalo lagi marah pengennya ngapain dan diapain? Manifestasi kemarahan lo biasanya dalam bentuk apa?"
+      },
+      {
+        "id": "q45",
+        "text": "Hal apa yang rentan membuat lo marah atau merasa tidak nyaman?"
+      },
+      {
+        "id": "q46",
+        "text": "Lo bisa ketrigger berantem sama orang/ pasangan, kalau pasangan lo melakukan apa?"
+      },
+      {
+        "id": "q47",
+        "text": "Ketika ada konflik, butuh berapa lama untuk mikir atau diskusi solusinya? Pengen selesain langsung atau butuh waktu dulu?"
+      },
+      {
+        "id": "q48",
+        "text": "Gimana cara lo menyikapi sesuatu yang tidak sesuai ekspektasi di keseharian atau hubungan?"
+      },
+      {
+        "id": "q49",
+        "text": "Apakah lo akan memberikan kesempatan, jika pasangan lo melakukan kesalahan atau berbuat sesuatu yang menyakiti lo? Sejauh apa toleransi lo?"
+      },
+      {
+        "id": "q50",
+        "text": "Misal nih lo lagi berantem sama pasangan lo dan belum memungkinkan untuk ngobrol dulu, lo bakal reach out siapa?"
+      },
+      {
+        "id": "q51",
+        "text": "Tanda fisik / perilaku yang biasanya muncul saat mulai overwhelmed dalam konflik? [Apa yang terlihat dari luar bukan yang dirasakan dalam. Misal: diam, pergi, nada suara berubah, HP-an terus."
+      },
+      {
+        "id": "q52",
+        "text": "Yang paling TIDAK membantu saat sedang overwhelmed apa yang kalau dilakukan pasangan justru memperburuk?[buat ngerti timing aja sih]"
+      },
+      {
+        "id": "q53",
+        "text": "Satu hal yang tanpa sadar dilakukan saat konflik yang mungkin memperburuk situasi?"
+      },
+      {
+        "id": "q54",
+        "text": "Cara terbaik buat pasangan memberitahu kamu kalau melakukan sesuatu yang menyakiti supaya satu sama lain bisa benar-benar mendengar dan tidak defensif?"
+      },
+      {
+        "id": "q55",
+        "text": "Pause Signal — kata / kalimat kode [Artinya: 'aku butuh sebentar, tapi aku tidak pergi' sbnernya biar disepakati supaya silence tuh tidak disalahartikan]"
+      },
+      {
+        "id": "q56",
+        "text": "Kalimat pembuka sebelum bercerita sesuatu yang berat [Misal: 'aku butuh didengar dulu, belum butuh solusi' ATAU 'ini sudah ada progressnya, aku mau share']"
+      },
+      {
+        "id": "q57",
+        "text": "Cara menyampaikan ketidaknyamanan yang paling bisa diterima [Format / situasi / kalimat pembuka yang membuat pesan bisa masuk tanpa memicu defensif]"
+      }
+    ]
+  },
+  {
+    "id": "family-having-child",
+    "name": "Family & Having Child",
+    "questions": [
+      {
+        "id": "q58",
+        "text": "Pengen punya anak atau engga? Kenapa?"
+      },
+      {
+        "id": "q59",
+        "text": "Kalo bakal punya anak, punya aspirasi apa untuk anak lo nanti dan apa yang ada di bayangan lo buat ngewujudinnya?"
+      },
+      {
+        "id": "q60",
+        "text": "Misal nihhhh, Tuhan belum ngasih anak atau amit2 pasangan lo belum bisa punya anak. Seberapa jauh ini akan berpengaruh ke pernikahan/ pandangan lo ke pasangan?"
+      },
+      {
+        "id": "q61",
+        "text": "Kalau udah jadi orang tua, bagaimana lo maintain peran sbg orang tua dan sebagai pasangan?"
+      },
+      {
+        "id": "q62",
+        "text": "Apa arti keluarga pasangan buat lo?"
+      },
+      {
+        "id": "q63",
+        "text": "Bagaimana cara lo menyikapi campur tangan keluarga ke keluarga kecil lo?"
+      },
+      {
+        "id": "q64",
+        "text": "Bagaimana lo menyikapi jika ada ketidakcocokan antara keluarga lo dan pasangan lo?"
+      }
+    ]
+  },
+  {
+    "id": "financial",
+    "name": "Financial",
+    "questions": [
+      {
+        "id": "q65",
+        "text": "Apa pertimbangan lo ketika harus mengeluarkan uang untuk sesuatu?"
+      },
+      {
+        "id": "q66",
+        "text": "Hal apa yang menurut lo worth spending more on?"
+      },
+      {
+        "id": "q67",
+        "text": "Pengeluaran yang paling sering bikin lo happy apa? Dan bagaimana lo mengkompromikan kebutuhan pasangan yang sekiranya itu bisa menyenangkan/ mendukung dia?"
+      },
+      {
+        "id": "q68",
+        "text": "Sejauh apa lo akan menafkahi keluarga lo di pernikahan?"
+      },
+      {
+        "id": "q69",
+        "text": "Kalo lo nikah, menurut lo siapa yang bakal handle financial things?"
+      },
+      {
+        "id": "q70",
+        "text": "Pengen pasangan lo tetep kerja atau terserah dia atau ngurus rumah aja?"
+      },
+      {
+        "id": "q71",
+        "text": "Kontribusi finansial apa yang lo harapkan dari pasangan lo?"
+      }
+    ]
+  },
+  {
+    "id": "love-language",
+    "name": "Love Language",
+    "questions": [
+      {
+        "id": "q72",
+        "text": "Love language utama lu sekarang apa? [Pilih dari 5: Words of Affirmation / Quality Time / Receiving Gifts / Acts of Service / Physical Touch. Boleh 1-2 kalau hampir setara.]"
+      },
+      {
+        "id": "q73",
+        "text": "Dialek spesifiknya — dari love language itu, cara yang PALING nyampe tuh seperti apa? [Misal kalau QT: ngobrol dalam, atau diam bareng juga cukup? Kalau WoA: pujian umum, atau harus spesifik notice hal kecil?]"
+      },
+      {
+        "id": "q74",
+        "text": "Kapan terakhir merasa paling dicintai ceritain situasi & detailnya? [situasi spesifik: apa yang dilakukan, di mana, kapan.]"
+      },
+      {
+        "id": "q75",
+        "text": "Ada momen ketika usaha pasangan tulus tapi somehow kurang nyampe? [ini untuk tau gap antara intensi vs dampak yang diterima.]"
+      },
+      {
+        "id": "q76",
+        "text": "Kalau love tank lagi kosong karena rutinitas / sibuk, satu hal terkecil yang paling cepat mengisinya kembali?"
+      },
+      {
+        "id": "q77",
+        "text": "Ada cara kamu memberi cinta ke pasangan yang kamu pikir sudah nyampe ternyata mungkin belum cukup?"
+      }
+    ]
+  },
+  {
+    "id": "gap",
+    "name": "Gap",
+    "questions": [
+      {
+        "id": "q78",
+        "text": "Financial knowledge & mindset Sejauh apa?"
+      },
+      {
+        "id": "q79",
+        "text": "Scheduling & efisiensi waktu bersama idealnya kayak gimana?"
+      },
+      {
+        "id": "q80",
+        "text": "Bisa membimbing tapi tidak otoriter ekspektasinya gimana?"
+      },
+      {
+        "id": "q81",
+        "text": "Mastering 3+ love languages,definisi dari mastering ini kayak gimana ya?"
+      }
+    ]
+  }
+]
