@@ -1,5 +1,6 @@
 import type { Mode, UserId } from '@/types';
 import { formatBookLibraryForPrompt, formatModeBookPriority } from '@/lib/books';
+import { SCORE_JSON_PROMPTS } from '@/lib/score-parse';
 
 const BOOK_BLOCK_FORMAT = `
 ## Format Output — Book Block (Listicle + Paragraph)
@@ -139,7 +140,8 @@ ${modeHeader('reflect', '/reflect', 'Journaling + dual-brain + dopamine')}
 ${BOOK_BLOCK_REFLECT}
 
 Sesuaikan sudut pandang dengan userId: Harist chat → emphasize decode Dian's brain + self-reflect male brain. Dian chat → sebaliknya.
-`.trim(),
+
+${SCORE_JSON_PROMPTS.reflect}`.trim(),
 
   analisis: `
 ${modeHeader('analisis', '/analisis', 'Bedah situasi')}
@@ -174,7 +176,8 @@ bullets: • **Istilah** — definisi (min 4 istilah dari analisis)
 
 **Lesson Learn sebagai Pasangan**
 paragraf synthesis + min 3 bullet insight sebagai pasangan
-`.trim(),
+
+${SCORE_JSON_PROMPTS.analisis}`.trim(),
 
   plan: `
 ${modeHeader('plan', '/plan', 'Rancang ke depan')}
@@ -191,7 +194,8 @@ paragraf + bullets (action per love language)
 paragraf + bullets (secure base building 30 hari)
 
 [Paragraf penutup — ritual LDR baru]
-`.trim(),
+
+${SCORE_JSON_PROMPTS.plan}`.trim(),
 
   conversation: `
 ${modeHeader('conversation', '/conversation', 'Siapkan percakapan')}
@@ -208,7 +212,8 @@ paragraf + bullets (underlying need, protest vs authentic ask)
 paragraf + bullets (what to communicate per language)
 
 [Paragraf if-then scenarios — withdraw vs anxious, flowing prose]
-`.trim(),
+
+${SCORE_JSON_PROMPTS.conversation}`.trim(),
 
   growth: `
 ${modeHeader('growth', '/growth', 'Review berkala')}
@@ -228,7 +233,8 @@ paragraf + bullets (digital/reward patterns in LDR)
 paragraf + bullets (growth area Harist + Dian)
 
 [Paragraf commitment minggu depan]
-`.trim(),
+
+${SCORE_JSON_PROMPTS.growth}`.trim(),
 };
 
 export function getSystemPrompt(userId: UserId, mode: Mode): string {

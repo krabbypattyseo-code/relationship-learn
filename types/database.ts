@@ -16,6 +16,7 @@ export interface Database {
           mode: string;
           title: string | null;
           messages: Json;
+          score_data: Json | null;
           created_at: string;
           updated_at: string;
         };
@@ -25,6 +26,7 @@ export interface Database {
           mode: string;
           title?: string | null;
           messages: Json;
+          score_data?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -34,6 +36,7 @@ export interface Database {
           mode?: string;
           title?: string | null;
           messages?: Json;
+          score_data?: Json | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -54,6 +57,63 @@ export interface Database {
           user_id?: string;
           pin?: string;
           updated_at?: string;
+        };
+        Relationships: [];
+      };
+      growth_scores: {
+        Row: {
+          id: string;
+          user_id: string;
+          period_start: string;
+          period_end: string;
+          oxytocin_score: number;
+          dopamine_score: number;
+          serotonin_score: number;
+          cortisol_score: number;
+          er_self_awareness: number | null;
+          er_self_regulation: number | null;
+          er_empathy: number | null;
+          er_social_skill: number | null;
+          er_composite: number | null;
+          er_generated_at: string | null;
+          entries_count: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          period_start: string;
+          period_end: string;
+          oxytocin_score: number;
+          dopamine_score: number;
+          serotonin_score: number;
+          cortisol_score: number;
+          er_self_awareness?: number | null;
+          er_self_regulation?: number | null;
+          er_empathy?: number | null;
+          er_social_skill?: number | null;
+          er_composite?: number | null;
+          er_generated_at?: string | null;
+          entries_count: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          period_start?: string;
+          period_end?: string;
+          oxytocin_score?: number;
+          dopamine_score?: number;
+          serotonin_score?: number;
+          cortisol_score?: number;
+          er_self_awareness?: number | null;
+          er_self_regulation?: number | null;
+          er_empathy?: number | null;
+          er_social_skill?: number | null;
+          er_composite?: number | null;
+          er_generated_at?: string | null;
+          entries_count?: number;
+          created_at?: string;
         };
         Relationships: [];
       };

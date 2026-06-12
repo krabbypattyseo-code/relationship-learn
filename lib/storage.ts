@@ -1,4 +1,4 @@
-import type { ChatEntry, Message, Mode, UserId } from '@/types';
+import type { ChatEntry, Message, Mode, ModeScoreData, UserId } from '@/types';
 import { getServiceClient } from '@/lib/supabase';
 
 function rowToEntry(row: {
@@ -7,6 +7,7 @@ function rowToEntry(row: {
   mode: string;
   title: string | null;
   messages: unknown;
+  score_data?: unknown;
   created_at: string;
   updated_at: string;
 }): ChatEntry {
@@ -16,6 +17,7 @@ function rowToEntry(row: {
     mode: row.mode as Mode,
     title: row.title,
     messages: row.messages as Message[],
+    score_data: (row.score_data as ModeScoreData | null) ?? null,
     created_at: row.created_at,
     updated_at: row.updated_at,
   };
@@ -26,6 +28,7 @@ export async function createEntry(params: {
   mode: Mode;
   messages: Message[];
   title?: string;
+  scoreData?: ModeScoreData | null;
 }): Promise<{ id: string; created_at: string } | { error: string }> {
   const client = getServiceClient();
 
@@ -45,6 +48,9 @@ export async function createEntry(params: {
       mode: params.mode,
       title,
       messages: params.messages as unknown as import('@/types/database').Json,
+      score_data: params.scoreData
+        ? (params.scoreData as unknown as import('@/types/database').Json)
+        : null,
     })
     .select('id, created_at')
     .single();
@@ -105,4 +111,27 @@ export async function getEntryById(id: string): Promise<ChatEntry | null> {
   }
 
   return rowToEntry(data);
+}
+
+export async function deleteEntry(
+  id: string,
+  userId: UserId
+): Promise<{ ok: true } | { error: string }> {
+  const client = getServiceClient();
+
+  if (!client) {
+    return { error: 'Supabase not configured' };
+  }
+
+  const { error } = await client
+    .from('chat_entries')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', userId);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  return { ok: true };
 }

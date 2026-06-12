@@ -29,19 +29,23 @@ function DianChatContent() {
     router.replace(`/dian/chat?mode=${mode}`);
   };
 
-  const handleSave = useCallback(async (messages: Message[]) => {
-    if (!selectedMode) return;
+  const handleSave = useCallback(
+    async (messages: Message[], scoreData?: import('@/types').ModeScoreData | null) => {
+      if (!selectedMode) return;
 
-    await fetch('/api/entries', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: 'dian',
-        mode: selectedMode,
-        messages,
-      }),
-    });
-  }, [selectedMode]);
+      await fetch('/api/entries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'dian',
+          mode: selectedMode,
+          messages,
+          scoreData: scoreData ?? null,
+        }),
+      });
+    },
+    [selectedMode]
+  );
 
   return (
     <div className="min-h-screen bg-rgp-cream">

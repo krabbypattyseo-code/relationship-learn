@@ -10,7 +10,7 @@ export default function UserNav({ userId, userLabel }: UserNavProps) {
   const links = [
     { href: `/${userId}`, label: 'Dashboard' },
     { href: `/${userId}/chat`, label: 'Chat' },
-    { href: '/growth', label: 'Growth' },
+    { href: `/${userId}/growth`, label: 'Growth' },
   ];
 
   return (

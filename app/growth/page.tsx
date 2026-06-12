@@ -1,36 +1,40 @@
 import Header from '@/components/Header';
 import GrowthDashboard from '@/components/GrowthDashboard';
-import { getEntries } from '@/lib/storage';
-import type { ChatEntry } from '@/types';
+import { loadGrowthData } from '@/lib/growth-data';
 
 export default async function GrowthPage() {
-  const [haristResult, dianResult] = await Promise.all([
-    getEntries({ userId: 'harist', limit: 50 }),
-    getEntries({ userId: 'dian', limit: 50 }),
+  const [harist, dian] = await Promise.all([
+    loadGrowthData('harist'),
+    loadGrowthData('dian'),
   ]);
-
-  const haristEntries: ChatEntry[] =
-    'error' in haristResult ? [] : haristResult;
-  const dianEntries: ChatEntry[] = 'error' in dianResult ? [] : dianResult;
 
   return (
     <div className="min-h-screen bg-rgp-cream">
       <Header />
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-12">
         <h1 className="mb-2 text-3xl font-bold text-rgp-green">Shared Growth</h1>
-        <p className="mb-10 text-rgp-muted">
-          Overview aktivitas journaling Harist dan Dian.
+        <p className="mb-10 max-w-2xl text-rgp-muted">
+          Hormone Performance & Emotion Regulation scores — ringkasan angka performa
+          Harist dan Dian tanpa detail aktivitas pribadi.
         </p>
 
         <div className="space-y-16">
           <section>
             <h2 className="mb-6 text-xl font-bold text-rgp-harist">Harist</h2>
-            <GrowthDashboard entries={haristEntries} />
+            <GrowthDashboard
+              entries={harist.entries}
+              snapshot={harist.snapshot}
+              variant="shared"
+            />
           </section>
 
           <section>
             <h2 className="mb-6 text-xl font-bold text-rgp-dian">Dian</h2>
-            <GrowthDashboard entries={dianEntries} />
+            <GrowthDashboard
+              entries={dian.entries}
+              snapshot={dian.snapshot}
+              variant="shared"
+            />
           </section>
         </div>
       </main>

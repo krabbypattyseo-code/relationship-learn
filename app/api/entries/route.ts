@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isValidUserId } from '@/lib/auth';
-import { createEntry, getEntries } from '@/lib/storage';
+import { createEntry, deleteEntry, getEntries } from '@/lib/storage';
+import {
+  maybeGenerateERScore,
+  recalculateAfterDelete,
+  syncHormoneScores,
+} from '@/lib/score-storage';
 import type { Mode, Message } from '@/types';
 
 const VALID_MODES: Mode[] = [
@@ -37,11 +42,12 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { userId, mode, messages, title } = body as {
+    const { userId, mode, messages, title, scoreData } = body as {
       userId: unknown;
       mode: unknown;
       messages: Message[];
       title?: string;
+      scoreData?: unknown;
     };
 
     if (!isValidUserId(userId)) {
@@ -61,15 +67,67 @@ export async function POST(req: NextRequest) {
       mode: mode as Mode,
       messages,
       title,
+      scoreData: scoreData as import('@/types').ModeScoreData | null | undefined,
     });
 
     if ('error' in result) {
       return NextResponse.json({ error: result.error }, { status: 500 });
     }
 
-    return NextResponse.json(result);
+    const allEntriesResult = await getEntries({ userId, limit: 100 });
+    let scores = null;
+    let erScore = null;
+    let snapshot = null;
+
+    if (!('error' in allEntriesResult)) {
+      const sync = await syncHormoneScores(userId, allEntriesResult);
+      scores = sync.hormone;
+      snapshot = sync.snapshot;
+      erScore = await maybeGenerateERScore(
+        userId,
+        allEntriesResult,
+        mode as Mode
+      );
+      if (erScore && snapshot) {
+        snapshot = { ...snapshot, er: erScore, lastUpdated: new Date().toISOString() };
+      }
+    }
+
+    return NextResponse.json({
+      id: result.id,
+      created_at: result.created_at,
+      entryId: result.id,
+      scores,
+      erScore,
+      snapshot,
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Failed to save entry';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { userId, id } = body as { userId: unknown; id: unknown };
+
+    if (!isValidUserId(userId) || typeof id !== 'string') {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+    }
+
+    const deleted = await deleteEntry(id, userId);
+    if ('error' in deleted) {
+      return NextResponse.json({ error: deleted.error }, { status: 500 });
+    }
+
+    const remainingResult = await getEntries({ userId, limit: 100 });
+    const remaining = 'error' in remainingResult ? [] : remainingResult;
+    const snapshot = await recalculateAfterDelete(userId, remaining);
+
+    return NextResponse.json({ ok: true, snapshot });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to delete entry';
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
