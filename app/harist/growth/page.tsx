@@ -13,8 +13,8 @@ export default async function HaristGrowthPage() {
         <UserNav userId="harist" userLabel="Harist" />
         <h1 className="mb-2 text-3xl font-bold text-rgp-green">Growth</h1>
         <p className="mb-10 text-rgp-muted">
-          Hormone Performance & Emotion Regulation — pribadi Harist, termasuk history
-          aktivitas.
+          Hormone Performance & Emotion Regulation — pribadi Harist. Generate ER Score
+          langsung dari entri journaling minggu ini.
         </p>
         <GrowthDashboard entries={entries} snapshot={snapshot} userId="harist" variant="private" />
       </main>

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isValidUserId } from '@/lib/auth';
 import { createEntry, deleteEntry, getEntries } from '@/lib/storage';
 import {
-  maybeGenerateERScore,
   recalculateAfterDelete,
   syncHormoneScores,
 } from '@/lib/score-storage';
@@ -76,21 +75,12 @@ export async function POST(req: NextRequest) {
 
     const allEntriesResult = await getEntries({ userId, limit: 100 });
     let scores = null;
-    let erScore = null;
     let snapshot = null;
 
     if (!('error' in allEntriesResult)) {
       const sync = await syncHormoneScores(userId, allEntriesResult);
       scores = sync.hormone;
       snapshot = sync.snapshot;
-      erScore = await maybeGenerateERScore(
-        userId,
-        allEntriesResult,
-        mode as Mode
-      );
-      if (erScore && snapshot) {
-        snapshot = { ...snapshot, er: erScore, lastUpdated: new Date().toISOString() };
-      }
     }
 
     return NextResponse.json({
@@ -98,7 +88,6 @@ export async function POST(req: NextRequest) {
       created_at: result.created_at,
       entryId: result.id,
       scores,
-      erScore,
       snapshot,
     });
   } catch (err) {

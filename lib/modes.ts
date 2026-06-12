@@ -25,12 +25,6 @@ export const MODES: ModeConfig[] = [
     icon: 'message',
     description: 'Siapkan percakapan — Gottman (soft startup) + Brown (vulnerability)',
   },
-  {
-    id: 'growth',
-    label: '/growth',
-    icon: 'trending',
-    description: 'Review berkala — Fisher (love systems) + Perel (LDR intimacy)',
-  },
 ];
 
 export const MODE_COLORS: Record<string, string> = {

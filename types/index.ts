@@ -136,6 +136,7 @@ export interface GrowthScoreSnapshot {
   periodEnd: string;
   hormone: HormoneScore;
   er: ERScore | null;
+  erGeneratedAt?: string | null;
   entriesCount: number;
   createdAt: string;
   lastUpdated: string;

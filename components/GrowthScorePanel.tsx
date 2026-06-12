@@ -2,13 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, Sparkles } from 'lucide-react';
 import type { GrowthScoreSnapshot, HormoneScore, UserId } from '@/types';
 import {
   getERDimensionHint,
   getHormoneHint,
   getScoreBand,
   getStressLevelLabel,
+  isERCacheFresh,
 } from '@/lib/scoring-ui';
 
 interface GrowthScorePanelProps {
@@ -91,6 +92,8 @@ export default function GrowthScorePanel({
   const router = useRouter();
   const [snapshot, setSnapshot] = useState(initialSnapshot);
   const [refreshing, setRefreshing] = useState(false);
+  const [generatingER, setGeneratingER] = useState(false);
+  const [erError, setErError] = useState<string | null>(null);
   const isShared = variant === 'shared';
 
   useEffect(() => {
@@ -104,6 +107,10 @@ export default function GrowthScorePanel({
     hour: '2-digit',
     minute: '2-digit',
   });
+
+  const erCacheFresh = isERCacheFresh(snapshot.erGeneratedAt);
+  const canGenerateER =
+    !isShared && userId && snapshot.entriesCount > 0 && !erCacheFresh;
 
   async function handleRefresh() {
     if (!userId || refreshing) return;
@@ -121,6 +128,30 @@ export default function GrowthScorePanel({
       }
     } finally {
       setRefreshing(false);
+    }
+  }
+
+  async function handleGenerateER() {
+    if (!userId || generatingER || !canGenerateER) return;
+    setGeneratingER(true);
+    setErError(null);
+    try {
+      const res = await fetch('/api/scores/er', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErError(data.error ?? 'Gagal generate ER Score');
+        return;
+      }
+      if (data.snapshot) setSnapshot(data.snapshot);
+      router.refresh();
+    } catch {
+      setErError('Gagal generate ER Score. Coba lagi nanti.');
+    } finally {
+      setGeneratingER(false);
     }
   }
 
@@ -161,7 +192,7 @@ export default function GrowthScorePanel({
                 className="inline-flex items-center gap-1.5 rounded-full border border-rgp-green/20 px-3 py-1 text-xs font-medium text-rgp-green transition hover:bg-rgp-green/5 disabled:opacity-50"
               >
                 <RefreshCw className={`h-3 w-3 ${refreshing ? 'animate-spin' : ''}`} />
-                Refresh Score
+                Refresh Hormone
               </button>
             )}
           </div>
@@ -174,7 +205,21 @@ export default function GrowthScorePanel({
       </div>
 
       <div>
-        <h2 className="mb-4 text-lg font-bold text-rgp-charcoal">Emotion Regulation</h2>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+          <h2 className="text-lg font-bold text-rgp-charcoal">Emotion Regulation</h2>
+          {!isShared && userId && (
+            <button
+              type="button"
+              onClick={handleGenerateER}
+              disabled={!canGenerateER || generatingER}
+              className="inline-flex items-center gap-1.5 rounded-full bg-rgp-yellow px-4 py-1.5 text-xs font-semibold text-rgp-charcoal transition hover:bg-rgp-yellow-soft disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Sparkles className={`h-3.5 w-3.5 ${generatingER ? 'animate-pulse' : ''}`} />
+              {generatingER ? 'Generating...' : 'Generate ER Score'}
+            </button>
+          )}
+        </div>
+
         {snapshot.er ? (
           <div className="space-y-4">
             <ScoreCard
@@ -207,15 +252,24 @@ export default function GrowthScorePanel({
                 {snapshot.er.rationale}
               </p>
             )}
+            {!isShared && erCacheFresh && (
+              <p className="text-xs text-rgp-muted">
+                Score di-generate hari ini. Bisa generate ulang besok (cache 24 jam).
+              </p>
+            )}
           </div>
         ) : (
           <div className="rounded-2xl border border-dashed border-rgp-green/20 bg-white px-6 py-8 text-center">
             <p className="text-sm text-rgp-muted">
-              ER Score belum tersedia. Jalankan sesi{' '}
-              <span className="font-semibold text-rgp-green">/growth</span> untuk generate
-              Emotion Regulation score (1 Claude call, cache 24 jam).
+              {snapshot.entriesCount === 0
+                ? 'Belum ada entri minggu ini. Journaling dulu di /reflect atau mode lain, lalu klik Generate ER Score.'
+                : 'Analisis entri 7 hari terakhir untuk 4 dimensi Goleman — klik Generate ER Score (1 Claude call, cache 24 jam).'}
             </p>
           </div>
+        )}
+
+        {erError && (
+          <p className="mt-3 text-center text-sm text-red-600">{erError}</p>
         )}
       </div>
     </div>

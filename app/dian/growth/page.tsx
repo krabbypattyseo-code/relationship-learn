@@ -13,8 +13,8 @@ export default async function DianGrowthPage() {
         <UserNav userId="dian" userLabel="Dian" />
         <h1 className="mb-2 text-3xl font-bold text-rgp-green">Growth</h1>
         <p className="mb-10 text-rgp-muted">
-          Hormone Performance & Emotion Regulation — pribadi Dian, termasuk history
-          aktivitas.
+          Hormone Performance & Emotion Regulation — pribadi Dian. Generate ER Score
+          langsung dari entri journaling minggu ini.
         </p>
         <GrowthDashboard entries={entries} snapshot={snapshot} userId="dian" variant="private" />
       </main>

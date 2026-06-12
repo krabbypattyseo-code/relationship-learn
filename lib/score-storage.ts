@@ -18,9 +18,17 @@ import type {
   ERScore,
   GrowthScoreSnapshot,
   HormoneScore,
-  Mode,
   UserId,
 } from '@/types';
+
+export type GenerateERResult =
+  | {
+      ok: true;
+      er: ERScore;
+      snapshot: GrowthScoreSnapshot;
+      cached: boolean;
+    }
+  | { ok: false; error: string; code: 'no_entries' | 'failed' };
 
 const SCORES_FILE = path.join(process.cwd(), 'data', 'growth_scores.json');
 const PERIOD_DAYS = 7;
@@ -60,6 +68,7 @@ export function emptySnapshot(userId: UserId): GrowthScoreSnapshot {
     periodEnd,
     hormone: { oxytocin: 0, dopamine: 0, serotonin: 0, cortisol: 100 },
     er: null,
+    erGeneratedAt: null,
     entriesCount: 0,
     createdAt: now,
     lastUpdated: now,
@@ -94,6 +103,7 @@ function rowToSnapshot(row: StoredScoreRow): GrowthScoreSnapshot {
           rationale: '',
         }
       : null,
+    erGeneratedAt: row.er_generated_at,
     entriesCount: row.entries_count,
     createdAt: row.created_at,
     lastUpdated: row.er_generated_at ?? row.created_at,
@@ -300,7 +310,7 @@ function erFromRow(row: StoredScoreRow): ERScore | null {
   };
 }
 
-function isERCacheValid(erGeneratedAt: string | null): boolean {
+export function isERCacheValid(erGeneratedAt: string | null | undefined): boolean {
   if (!erGeneratedAt) return false;
   return Date.now() - new Date(erGeneratedAt).getTime() < getERCacheMs();
 }
@@ -344,29 +354,63 @@ async function saveERScore(userId: UserId, er: ERScore): Promise<void> {
   await writeFileScores(rows);
 }
 
-/** Event: /growth session — ER dengan guard 24 jam */
-export async function maybeGenerateERScore(
+/** Generate ER dari entri minggu ini — dipanggil dari dashboard (max 1x/24 jam) */
+export async function generateERScoreForUser(
   userId: UserId,
-  allEntries: ChatEntry[],
-  mode: Mode
-): Promise<ERScore | null> {
-  if (mode !== 'growth') return null;
+  allEntries: ChatEntry[]
+): Promise<GenerateERResult> {
+  const { weekEntries } = splitPeriodEntries(allEntries);
 
+  if (weekEntries.length === 0) {
+    return {
+      ok: false,
+      error: 'Belum ada entri minggu ini. Journaling dulu di /reflect atau mode lain.',
+      code: 'no_entries',
+    };
+  }
+
+  const { snapshot: hormoneSnapshot } = await syncHormoneScores(userId, allEntries);
   const periodStart = getMondayOfWeek();
   const existing = await fetchStoredRow(userId, periodStart);
 
   if (existing && isERCacheValid(existing.er_generated_at)) {
-    return erFromRow(existing);
+    const cachedEr = erFromRow(existing);
+    if (cachedEr) {
+      const row = await fetchStoredRow(userId, periodStart);
+      return {
+        ok: true,
+        er: cachedEr,
+        snapshot: row ? rowToSnapshot(row) : hormoneSnapshot,
+        cached: true,
+      };
+    }
   }
 
   try {
-    const { weekEntries } = splitPeriodEntries(allEntries);
     const er = await generateERScore(userId, weekEntries);
     await saveERScore(userId, er);
-    return er;
+    const row = await fetchStoredRow(userId, periodStart);
+    const snapshot = row ? rowToSnapshot(row) : { ...hormoneSnapshot, er, lastUpdated: new Date().toISOString() };
+    if (snapshot.er && er.rationale) {
+      snapshot.er = { ...snapshot.er, rationale: er.rationale };
+    }
+    return { ok: true, er, snapshot, cached: false };
   } catch {
-    if (existing) return erFromRow(existing);
-    return null;
+    const fallback = existing ? erFromRow(existing) : null;
+    if (fallback) {
+      const row = await fetchStoredRow(userId, periodStart);
+      return {
+        ok: true,
+        er: fallback,
+        snapshot: row ? rowToSnapshot(row) : hormoneSnapshot,
+        cached: true,
+      };
+    }
+    return {
+      ok: false,
+      error: 'Gagal generate ER Score. Coba lagi nanti.',
+      code: 'failed',
+    };
   }
 }
 

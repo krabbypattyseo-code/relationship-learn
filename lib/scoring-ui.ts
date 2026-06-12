@@ -75,3 +75,10 @@ export function formatWeekLabel(periodStart: string): string {
   const d = new Date(`${periodStart}T12:00:00`);
   return d.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
 }
+
+const ER_CACHE_MS = 86400000;
+
+export function isERCacheFresh(erGeneratedAt: string | null | undefined): boolean {
+  if (!erGeneratedAt) return false;
+  return Date.now() - new Date(erGeneratedAt).getTime() < ER_CACHE_MS;
+}
